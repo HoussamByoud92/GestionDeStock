@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/client.js"></script>
+  <script src="../js/script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/5f83cacf21.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-secondary">
+  <!-- Menu -->
+  <div class="list-group bg-white position-fixed start-0 mt-0 mb-0" style="width: 15%; height: 100%; border-radius: 0">
+    <span class="fs-4 text-black text-center list-group-item my-3 border border-0"><strong>Menu</strong></span>
+    <a href="index.html" class="list-group-item list-group-item-action">
+      <i class="fa-solid fa-home me-2"></i> Dashboard
+    </a>
+    <a href="client.html" class="list-group-item list-group-item-action active">
+      <i class="fa-solid fa-users me-2"></i> Clients
+    </a>
+    <div class="dropdown">
+      <div class="list-group-item list-group-item-action btn" aria-expanded="false"
+        onclick="slideToggle('#dropdown-stock')">
+        <div class="d-flex align-items-center justify-content-between">
+          <div><i class="fa-solid fa-boxes-stacked me-2"></i>Stock</div>
+          <i class="fa-solid fa-angle-right stock" style="transition: all 0.3s linear 0s; transform: rotate(0deg);"></i>
+        </div>
+      </div>
+      <div id="dropdown-stock" style="display: none;">
+        <a href="categorie.html" class="list-group-item list-group-item-action">Catégories</a>
+        <a href="produit.html" class="list-group-item list-group-item-action">Produits</a>
+        <a href="approvisionnemet.html" class="list-group-item list-group-item-action">Approvisionnements</a>
+      </div>
+    </div>
+    <a href="fournisseur.html" class="list-group-item list-group-item-action">
+      <i class="fa-solid fa-building-user me-2"></i> Fourniseurs
+    </a>
+    <a href="caisse.html" class="list-group-item list-group-item-action">
+      <i class="fa-solid fa-cash-register me-2"></i> Caisse
+    </a>
+    <a href="../connexion/deconnexion.php" class="list-group-item list-group-item-action">
+      <i class="fa-solid fa-right-from-bracket"></i> Déconexion
+    </a>
+  </div>
+
+  <nav class="navbar bg-white fixed-left" style="margin-left: 15%">
+    <div class="container-fluid p-2">
+      <div></div>
+      <h3 class="ms-5 text-primary">CLIENTS</h3>
+      <div></div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-left:14.2%;margin-right: 0;">
+    <div class="card mt-5 mx-5 rounded-3">
+      <div class="card-header px-5" style="
+            border-start-start-radius:var(--bs-border-radius-lg);
+            border-start-end-radius:var(--bs-border-radius-lg);
+            display: flex;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+          ">
+        <h4 class="text-primary">Liste des clients</h4>
+        <button class="btn btn-primary" style="
+              width: 8%;
+              display: flex;
+              flex-wrap: nowrap;
+              align-content: center;
+              align-items: center;
+              flex-direction: row;
+              justify-content: space-between;
+            " data-bs-toggle="offcanvas" data-bs-target="#offcanvasAjout">
+          <i class="fa-solid fa-plus" style="font-size: 20px;"></i>
+          <span>Ajouter</span>
+        </button>
+        <div class="offcanvas offcanvas-center rounded-2" tabindex="-1" id="offcanvasAjout"
+          aria-labelledby="offcanvasAjoutLabel" style="top: 15%;bottom: 15%;left: 30%;right: 30%;">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasLabel">Ajouter un client</h5>
+            <label for="resetForm" class="btn btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+            </label>
+          </div>
+          <div class="offcanvas-body">
+
+            <form method="get" class="add-form">
+              <div class="mb-3">
+                <label for="InputNom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="InputNom" autocomplete="off" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputTele" class="form-label">Téléphone</label>
+                <input type="text" class="form-control" id="InputTele" placeholder="Example : 0600000000"
+                  autocomplete="off" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="InputEmail" autocomplete="off" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputAdr" class="form-label">Address</label>
+                <input type="text" class="form-control" id="InputAdr" autocomplete="off" required>
+              </div>
+              <button type="submit" class="btn btn-primary mx-5" onclick="addClient()">Submit</button>
+              <button id="resetForm" type="reset" class="btn btn-danger">Reset</button>
+            </form>
+
+          </div>
+        </div>
+
+        <div class="offcanvas offcanvas-center rounded-2" tabindex="-1" id="offcanvasModifier"
+          aria-labelledby="offcanvasModifierLabel" style="top: 15%;bottom: 15%;left: 30%;right: 30%;">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title nom_client" id="offcanvasLabel">Modifier le client :</h5>
+            <button class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </label>
+          </div>
+          <div class="offcanvas-body">
+
+            <form class="modify-form">
+              <div class="mb-3">
+                <label for="InputNom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="InputNom" autocomplete="off" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputTele" class="form-label">Téléphone</label>
+                <input type="text" class="form-control" id="InputTele" placeholder="Example : 0600000000"
+                  autocomplete="off" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="InputEmail" autocomplete="off" required>
+              </div>
+              <div class="mb-3">
+                <label for="InputAdr" class="form-label">Address</label>
+                <input type="text" class="form-control" id="InputAdr" autocomplete="off" required>
+              </div>
+              <div class="modifyClient"></div>
+            </form>
+
+          </div>
+        </div>
+
+
+      </div>
+      <div class="d-flex justify-content-between align-items-center mx-5 mt-3">
+        <div class="d-flex align-items-center">
+          <span class="mx-3">afficher</span>
+          <select id="dataTable_length" aria-controls="dataTable" class="form-select" style="cursor: pointer;"
+            onchange="searshClient()">
+            <option selected value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="all">all</option>
+          </select>
+          <span class="mx-3">lignes</span>
+        </div>
+        <div class="d-flex align-items-center">
+          <span class="mx-3" style="width: 110%;">trier par</span>
+          <select id="dataTable_order" aria-controls="dataTable" class="form-select"
+            style="width: fit-content;cursor: pointer;" onchange="searshClient()">
+            <option value="1" selected>Nom ↑<i class="fa-solid fa-caret-up"> </i></option>
+            <option value="2">Nom ↓<i class="fa-solid fa-caret-down"></i> </option>
+            <option value="3">Date d'ajout ↑<i class="fa-solid fa-caret-up"></i> </option>
+            <option value="4">Date d'ajout ↓<i class="fa-solid fa-caret-down"></i> </option>
+          </select>
+        </div>
+        <div class="d-flex align-items-center">
+          <i id="filterIcon" class="fa-solid fa-filter btn mx-5 text-secondary" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasFilter"></i>
+
+          <div class="offcanvas offcanvas-center rounded-2" tabindex="-1" id="offcanvasFilter"
+            aria-labelledby="offcanvasFilterLabel" style="top: 20%;bottom: 40%;left: 30%;right: 30%;">
+            <form>
+
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLabel">Filtre</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <label class="form-label">Date d'ajout</label>
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                  <div class="mb-3 d-flex align-items-center" style="width: 40%;">
+                    <label class="form-label" style="margin-right: 2rem;">de</label>
+                    <input id="date_ajd" type="date" class="form-control" style="width: 65%;"
+                      onchange="dateAjClient(this)">
+                  </div>
+                  <div class="mb-3 d-flex align-items-center" style="width: 40%;">
+                    <label class="form-label" style="margin-right: 2rem;">jusqu'a</label>
+                    <input id="date_ajf" type="date" class="form-control" style="width: 65%;"
+                      onchange="dateAjClient(this)">
+                  </div>
+                </div>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                  <button type="reset" class="btn btn-danger" style="width: fit-content;"
+                    onclick="resetFilterForm()">Reset</button>
+                  <p id="hide-text" class="text-danger mt-3 d-none" style="width: fit-content;font-size: 18px;">date
+                    invalid !</p>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+          <form class="d-flex align-items-center">
+            chercher
+            <input id="search-client" class="form-control me-1 mx-3" type="search" onkeyup="searshClient()">
+            <span style="margin-left: 0.5rem;width: 102px;">par nom</span>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped table-hover mx-5 mt-3" style="width: auto;">
+        <thead>
+          <tr>
+            <th scope="col">NOM</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">E-MAIL</th>
+            <th scope="col">ADRESSE</th>
+            <th scope="col">DATE D'AJOUT</th>
+            <th scope="col" colspan="2">ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody id="table-data"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
+
+<script>
+  getClient();
+</script>

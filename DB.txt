@@ -1,0 +1,372 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 27 déc. 2022 à 22:22
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Base de données : `gestion_stock`
+--
+CREATE DATABASE IF NOT EXISTS `gestion_stock` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gestion_stock`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `login` text NOT NULL,
+  `pass` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`login`, `pass`) VALUES
+('admin@admin1.com', 'e10adc3949ba59abbe56e057f20f883e');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `app`
+--
+
+CREATE TABLE `app` (
+  `id_app` int(11) NOT NULL,
+  `id_f` int(11) NOT NULL,
+  `reference` varchar(256) NOT NULL,
+  `date` date NOT NULL,
+  `q` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `app`
+--
+
+INSERT INTO `app` (`id_app`, `id_f`, `reference`, `date`, `q`) VALUES
+(12, 8, 'pc1', '2022-12-26', 10),
+(111, 8, 'disque dure', '2022-12-27', 90),
+(123, 8, 'disque dure', '2022-12-20', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE `categorie` (
+  `id_cat` int(11) NOT NULL,
+  `cat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id_cat`, `cat`) VALUES
+(1, 'informatique'),
+(2, 'bauté'),
+(3, 'sport');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `client`
+--
+
+CREATE TABLE `client` (
+  `id_c` int(11) NOT NULL,
+  `nom` text NOT NULL,
+  `tele` varchar(10) NOT NULL,
+  `mail` text NOT NULL,
+  `adr` text NOT NULL,
+  `date_aj` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `client`
+--
+
+INSERT INTO `client` (`id_c`, `nom`, `tele`, `mail`, `adr`, `date_aj`) VALUES
+(1, 'bx', '123465', 'a@email.com', 'afdg', '2022-12-19'),
+(2, '22222', '000120', 'hgvj@x.com', 'kmm', '2022-12-20'),
+(3, 'c2', '0000000000', 'jbac@fdhs.com', 'cvvvc', '2022-12-20'),
+(4, 'bk', '0021', 'a@email.com', 'afdg', '2022-12-20'),
+(5, 'caaa', '021220', 'a@email.com', 'afdg', '2022-12-20'),
+(6, 'xxxxx', '4510', 'xxx@email.com', 'afdg', '2022-12-20'),
+(7, '000000000', '01111', 'hgvj@x.com', 'kmm', '2022-12-20'),
+(8, '01111111', '155555555', '10@x.com', 'kmm', '2022-12-27');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande`
+--
+
+CREATE TABLE `commande` (
+  `id_cmd` int(11) NOT NULL,
+  `id_c` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id_cmd`, `id_c`, `date`) VALUES
+(1230, 4, '2022-12-26'),
+(1254, 6, '2022-12-27'),
+(2545, 4, '2022-12-26');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fournisseur`
+--
+
+CREATE TABLE `fournisseur` (
+  `id_f` int(11) NOT NULL,
+  `nom` text NOT NULL,
+  `tele` varchar(10) NOT NULL,
+  `mail` text NOT NULL,
+  `adr` text NOT NULL,
+  `date_aj` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `fournisseur`
+--
+
+INSERT INTO `fournisseur` (`id_f`, `nom`, `tele`, `mail`, `adr`, `date_aj`) VALUES
+(1, 'f111', '123465', 'a@email.com', 'afdg', '2022-12-19'),
+(2, 'ff22222', '000120', 'hgvj@x.com', 'kmm', '2022-12-20'),
+(3, 'f2222220', '0000000000', 'jbac@fdhs.com', 'cvvvc', '2022-12-20'),
+(4, 'ffffffffffff', '0021', 'a@email.com', 'afdg', '2022-12-20'),
+(5, 'fffff55555', '021220', 'a@email.com', 'afdg', '2022-12-20'),
+(6, '6666', '4510', 'xxx@email.com', 'afdg', '2022-12-20'),
+(7, '7777', '01111', 'hgvj@x.com', 'kmm', '2022-12-27'),
+(8, 'F1111111', '0155555555', '10@x.com', 'kmm', '2022-12-27');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ligne_cmd`
+--
+
+CREATE TABLE `ligne_cmd` (
+  `id_cmd` int(11) NOT NULL,
+  `reference` varchar(256) NOT NULL,
+  `prix` double NOT NULL,
+  `qtt` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `ligne_cmd`
+--
+
+INSERT INTO `ligne_cmd` (`id_cmd`, `reference`, `prix`, `qtt`) VALUES
+(1230, 'disque dure', 9.99, 11),
+(1230, 'fgx', 1, 1),
+(1254, 'fgx', 100, 20),
+(1254, 'pc1', 2000, 15),
+(2545, 'fgx', 1, 2),
+(2545, 'pc1', 30, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `produit`
+--
+
+CREATE TABLE `produit` (
+  `reference` varchar(256) NOT NULL,
+  `libelle` double NOT NULL,
+  `prix_uni` double NOT NULL,
+  `prix_ach` double NOT NULL,
+  `prix_vnt` double NOT NULL,
+  `qtt` int(11) NOT NULL,
+  `img` text NOT NULL,
+  `date_aj` date NOT NULL,
+  `id_scat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `produit`
+--
+
+INSERT INTO `produit` (`reference`, `libelle`, `prix_uni`, `prix_ach`, `prix_vnt`, `qtt`, `img`, `date_aj`, `id_scat`) VALUES
+('disque dure', 5.99, 9.99, 4.99, 7.99, 100, 'disque dure.jpg', '2022-12-15', 2),
+('fgx', 1, 1, 1, 1, 1, 'fgx.jpg', '2022-12-21', 2),
+('pc1', 100, 30, 10, 20, 50, 'pc1.jpg', '2022-12-20', 1),
+('pc2', 10, 50, 30, 40, 50, 'pc2.jpg', '2022-12-30', 1),
+('pc3', 100, 100, 100, 100, 100, 'pc3.jpg', '2022-12-27', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sous_categori`
+--
+
+CREATE TABLE `sous_categori` (
+  `id_scat` int(11) NOT NULL,
+  `id_cat` int(11) NOT NULL,
+  `scat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `sous_categori`
+--
+
+INSERT INTO `sous_categori` (`id_scat`, `id_cat`, `scat`) VALUES
+(1, 1, 'pc'),
+(2, 1, 'disque dure'),
+(3, 2, 'makeup'),
+(4, 2, 'soins visage'),
+(5, 3, 'vetement de sport'),
+(6, 3, 'appareils de musculation'),
+(7, 3, 'football');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `app`
+--
+ALTER TABLE `app`
+  ADD PRIMARY KEY (`id_app`),
+  ADD KEY `fk_app_pro` (`reference`),
+  ADD KEY `fk_app_f` (`id_f`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id_cat`);
+
+--
+-- Index pour la table `client`
+--
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`id_c`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id_cmd`),
+  ADD KEY `fk_cmd_cli` (`id_c`);
+
+--
+-- Index pour la table `fournisseur`
+--
+ALTER TABLE `fournisseur`
+  ADD PRIMARY KEY (`id_f`);
+
+--
+-- Index pour la table `ligne_cmd`
+--
+ALTER TABLE `ligne_cmd`
+  ADD PRIMARY KEY (`id_cmd`,`reference`),
+  ADD KEY `fk_lcmd_pro` (`reference`);
+
+--
+-- Index pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD PRIMARY KEY (`reference`),
+  ADD KEY `fk_pro_scat` (`id_scat`);
+
+--
+-- Index pour la table `sous_categori`
+--
+ALTER TABLE `sous_categori`
+  ADD PRIMARY KEY (`id_scat`),
+  ADD KEY `fk_scat_cat` (`id_cat`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `app`
+--
+ALTER TABLE `app`
+  MODIFY `id_app` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT pour la table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id_c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `id_cmd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2546;
+
+--
+-- AUTO_INCREMENT pour la table `fournisseur`
+--
+ALTER TABLE `fournisseur`
+  MODIFY `id_f` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `sous_categori`
+--
+ALTER TABLE `sous_categori`
+  MODIFY `id_scat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `app`
+--
+ALTER TABLE `app`
+  ADD CONSTRAINT `fk_app_f` FOREIGN KEY (`id_f`) REFERENCES `fournisseur` (`id_f`),
+  ADD CONSTRAINT `fk_app_pro` FOREIGN KEY (`reference`) REFERENCES `produit` (`reference`);
+
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `fk_cmd_cli` FOREIGN KEY (`id_c`) REFERENCES `client` (`id_c`);
+
+--
+-- Contraintes pour la table `ligne_cmd`
+--
+ALTER TABLE `ligne_cmd`
+  ADD CONSTRAINT `fk_lcmd_cmd` FOREIGN KEY (`id_cmd`) REFERENCES `commande` (`id_cmd`),
+  ADD CONSTRAINT `fk_lcmd_pro` FOREIGN KEY (`reference`) REFERENCES `produit` (`reference`);
+
+--
+-- Contraintes pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD CONSTRAINT `fk_pro_scat` FOREIGN KEY (`id_scat`) REFERENCES `sous_categori` (`id_scat`);
+
+--
+-- Contraintes pour la table `sous_categori`
+--
+ALTER TABLE `sous_categori`
+  ADD CONSTRAINT `fk_scat_cat` FOREIGN KEY (`id_cat`) REFERENCES `categorie` (`id_cat`);
+COMMIT;

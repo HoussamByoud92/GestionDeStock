@@ -1,0 +1,17 @@
+projet a été réalisé avec la collaboration de:
+	Saad HADADIA & Houssam BYOUD
+
+
+le script de la base de données est dans le fichier text 'DB.txt'
+les ficher du projet sont dans le docier 'gestion_stock'
+
+
+pour lancer le projet veiller:
+	1- creer une base de données nommée 'gestion_projet' et importer le script correspondant 
+	2- lancer un logiciel permmettant de metre en place un serveur web local dans votre machine
+	3- copier le docier 'gestion_stock' dans votre ordinatuer
+	4- connectez-vous au site 'http://localhost/gestion_stock'
+
+Authentification:
+	username : admin@admin1.com
+	password : 123456
